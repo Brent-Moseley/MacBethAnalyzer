@@ -22,12 +22,8 @@ Your solution must be tested, preferably via TDD.
 
 ## Working/Submitting
 
-1. To work on this exercise, fork the repo and begin implementing your solution.
-2. When you are done, copy the output of your program into a file in this repository. 
-3. Create a pull request so your code can be reviewed.
+1. Implement your solution.
+2. When you are done, copy the output of your program into a file in this repository.
+3. Push your code and return to https://exercises.upcase.com/exercises/shakespeare-analyzer. Click "Submit solution".
 4. Perform a code review on at least one other person's solution. Your comments should follow our code review guidelines: https://github.com/thoughtbot/guides/tree/master/code-review. Most important: be friendly. Make suggestions, not demands. 
 5. Improve your solution based on the comments you've received and approaches you've learned from reviewing others' attempts.
-
-## Bounty
-
-While knowledge and skill improvement are their own rewards, the author with the best solution (as judged by thoughtbot) will receive a cool thoughtbot t-shirt.
