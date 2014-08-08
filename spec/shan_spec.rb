@@ -17,9 +17,9 @@ describe Analyzer do
 
    describe "#readPlay" do
    	it "returns the number of chars read from the Macbeth play url" do
-      @analyzer.play.readPlay('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml').should > 0
+      @analyzer.play.readPlay('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml').should > 1000
    	end
-   	it "returns the number of lines" do
+   	it "returns the number of lines read from the webpage, broken up by closing tag" do
    	  @analyzer.play.readPlay('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml')
       @analyzer.play.makeLines.should > 0
    	end   	
@@ -28,7 +28,7 @@ describe Analyzer do
       @analyzer.play.makeLines
       @analyzer.play.makeChars.should > 0
    	end      	
-   	it "returns the number of total lines processed when calculating lines for each character" do
+   	it "returns the number of total spoken lines processed when calculating lines for each character" do
    	  @analyzer.play.readPlay('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml')
       @analyzer.play.makeLines
       @analyzer.play.makeChars
