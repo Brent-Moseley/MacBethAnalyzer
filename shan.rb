@@ -6,7 +6,7 @@ class Analyzer
 
   def initialize
   	@play = Play.new
-  	puts "created"
+  	puts "created play object"
   end
 end
 
@@ -29,7 +29,6 @@ class Play
 	@data = response.body
 	puts "Response from read Play, num chars:" + @data.length.to_s
 
-
   	@data.length
   end
 
@@ -37,7 +36,6 @@ class Play
   	#parse through text array breaking up on all closing tags
   	@text = @data.split('</')
     puts "Number of lines: " + @text.length.to_s
-    #puts @text.first 20       #show the first 20 
     @text.length
   end
 
@@ -46,12 +44,9 @@ class Play
   	@characters = {}
   	@text.each do |line|
   	  pos = line.index('<SPEAKER')
-  	  @characters[line[pos+8..-1]] = 0 if pos   # create hash entry with the name being the key and total number of lines set to zero.
+  	  @characters[line[pos+8..-1]] = 0 if pos   # create hash entry with the character name being the key and total number of lines set to zero.
   	end
     puts "Total number of characters: " + @characters.length.to_s
-    # @characters.each do |char|
-    #   puts char
-    # end
     
     @characters.length
   end
@@ -61,22 +56,30 @@ class Play
   	totalLinesProcessed = 0
   	currentSpeaker = ''
  	@text.each do |line|
-  	  possp = line.index('<SPEAKER')     # Search for a speaker on this current line
-  	  posend = line.index('</SPEECH')     # Search for end
+  	  possp = line.index('<SPEAKER')     # Search for a speaker tag on this current line
+  	  posend = line.index('</SPEECH')     # Search for end of speech block
   	  posline = line.index('<LINE')      # Search for a line of text
 
-  	  if possp
+  	  if possp    
+  	  	# a new speaker
   	  	speechBlock = true
   	  	# identify current speaker
   	  	currentSpeaker = line[possp+8..-1]
   	  end
-  	  speechBlock = false if posend
-  	  if speechBlock && posline && currentSpeaker.length > 0   # If we are in a speech block and we have a line as well as a current speaker
-        @characters[currentSpeaker] += 1
+ 
+  	  if posend
+  	  	# end of current speech block
+  	  	speechBlock = false
+  	  	currentSpeaker = ''
+  	  end
+
+  	  if speechBlock && posline && currentSpeaker.length > 0   
+  	    # If we are in a speech block and we have a line as well as a current speaker
+        @characters[currentSpeaker] += 1   # Tally up this line
         totalLinesProcessed += 1
   	  end
   	end
-    puts "Total number of lines processed: " + totalLinesProcessed.to_s      
+    puts "Total number of spoken lines processed: " + totalLinesProcessed.to_s      
     return totalLinesProcessed	
   end
 
