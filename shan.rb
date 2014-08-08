@@ -59,9 +59,7 @@ class Play
   	  posline = line.index('<LINE')      # Search for a line of text
 
   	  if possp    
-  	  	# a new speaker
-  	  	speechBlock = true
-  	  	# identify current speaker
+  	  	# a new speaker, identify as current speaker
   	  	currentSpeaker = line[possp+8..-1]
   	  end
 
