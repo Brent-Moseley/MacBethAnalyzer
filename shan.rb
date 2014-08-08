@@ -52,12 +52,10 @@ class Play
   end
 
   def calculateLines
-  	speechBlock = false
   	totalLinesProcessed = 0
   	currentSpeaker = ''
  	@text.each do |line|
   	  possp = line.index('<SPEAKER')     # Search for a speaker tag on this current line
-  	  posend = line.index('</SPEECH')     # Search for end of speech block
   	  posline = line.index('<LINE')      # Search for a line of text
 
   	  if possp    
@@ -66,15 +64,9 @@ class Play
   	  	# identify current speaker
   	  	currentSpeaker = line[possp+8..-1]
   	  end
- 
-  	  if posend
-  	  	# end of current speech block
-  	  	speechBlock = false
-  	  	currentSpeaker = ''
-  	  end
 
-  	  if speechBlock && posline && currentSpeaker.length > 0   
-  	    # If we are in a speech block and we have a line as well as a current speaker
+  	  if posline && currentSpeaker.length > 0   
+  	    # If we have a line as well as a current speaker
         @characters[currentSpeaker] += 1   # Tally up this line
         totalLinesProcessed += 1
   	  end
