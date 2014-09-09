@@ -54,7 +54,7 @@ class Play
   def calculateLines
   	totalLinesProcessed = 0
   	currentSpeaker = ''
- 	@text.each do |line|
+ 	  @text.each do |line|
   	  possp = line.index('<SPEAKER')     # Search for a speaker tag on this current line
   	  posline = line.index('<LINE')      # Search for a line of text
 
